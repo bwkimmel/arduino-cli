@@ -1,0 +1,54 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "i18n",
+    srcs = [
+        "detect.go",
+        "detect_darwin.go",
+        "detect_linux.go",
+        "detect_windows.go",
+        "i18n.go",
+        "locale.go",
+        "rice-box.go",
+    ],
+    cgo = True,
+    clinkopts = select({
+        "@io_bazel_rules_go//go/platform:darwin": [
+            "-framework Foundation",
+        ],
+        "@io_bazel_rules_go//go/platform:ios": [
+            "-framework Foundation",
+        ],
+        "//conditions:default": [],
+    }),
+    copts = select({
+        "@io_bazel_rules_go//go/platform:darwin": [
+            "-x objective-c",
+        ],
+        "@io_bazel_rules_go//go/platform:ios": [
+            "-x objective-c",
+        ],
+        "//conditions:default": [],
+    }),
+    importpath = "github.com/arduino/arduino-cli/i18n",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_geertjohan_go_rice//:go.rice",
+        "@com_github_geertjohan_go_rice//embedded",
+        "@com_github_leonelquinteros_gotext//:gotext",
+        "@com_github_spf13_viper//:viper",
+    ],
+)
+
+go_test(
+    name = "i18n_test",
+    srcs = [
+        "i18n_test.go",
+        "locale_test.go",
+    ],
+    embed = [":i18n"],
+    deps = [
+        "@com_github_leonelquinteros_gotext//:gotext",
+        "@com_github_stretchr_testify//require",
+    ],
+)

@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "update",
+    srcs = ["update.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/update",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "//cli/instance",
+        "//cli/output",
+        "//commands",
+        "//rpc/commands",
+        "//table",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

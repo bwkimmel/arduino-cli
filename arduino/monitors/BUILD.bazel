@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "monitors",
+    srcs = [
+        "serial.go",
+        "types.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/monitors",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_pkg_errors//:errors",
+        "@st_bug_go_serial//:serial",
+    ],
+)

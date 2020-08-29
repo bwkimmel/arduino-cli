@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "generatedocs",
+    srcs = ["generatedocs.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/generatedocs",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/errorcodes",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_cobra//doc",
+    ],
+)

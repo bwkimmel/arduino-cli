@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "httpclient",
+    srcs = [
+        "httpclient.go",
+        "httpclient_config.go",
+        "httpclient_transport.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/httpclient",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/globals",
+        "@com_github_spf13_viper//:viper",
+    ],
+)
+
+go_test(
+    name = "httpclient_test",
+    srcs = ["httpclient_test.go"],
+    embed = [":httpclient"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

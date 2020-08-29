@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cores",
+    srcs = [
+        "board.go",
+        "cores.go",
+        "fqbn.go",
+        "programmers.go",
+        "status.go",
+        "tools.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/cores",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/resources",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_pmylund_sortutil//:sortutil",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)
+
+go_test(
+    name = "cores_test",
+    srcs = [
+        "board_test.go",
+        "fqbn_test.go",
+        "tools_test.go",
+    ],
+    embed = [":cores"],
+    deps = [
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_stretchr_testify//require",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "utils",
+    srcs = ["utils.go"],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/utils",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//legacy/builder/constants",
+        "//legacy/builder/gohasissues",
+        "//legacy/builder/i18n",
+        "//legacy/builder/types",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_pkg_errors//:errors",
+        "@org_golang_x_text//transform",
+        "@org_golang_x_text//unicode/norm",
+    ],
+)

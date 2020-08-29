@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "debug",
+    srcs = ["debug.go"],
+    importpath = "github.com/arduino/arduino-cli/commands/debug",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//arduino/sketches",
+        "//commands",
+        "//executils",
+        "//rpc/debug",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)
+
+go_test(
+    name = "debug_test",
+    srcs = ["debug_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":debug"],
+    deps = [
+        "//arduino/cores/packagemanager",
+        "//rpc/commands",
+        "//rpc/debug",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

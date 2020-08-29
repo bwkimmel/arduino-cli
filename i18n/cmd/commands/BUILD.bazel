@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "commands",
+    srcs = ["root.go"],
+    importpath = "github.com/arduino/arduino-cli/i18n/cmd/commands",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//i18n/cmd/commands/catalog",
+        "//i18n/cmd/commands/transifex",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

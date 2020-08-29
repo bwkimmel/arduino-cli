@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "i18n",
+    srcs = [
+        "errors.go",
+        "i18n.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/i18n",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//legacy/builder/constants",
+        "@com_github_pkg_errors//:errors",
+    ],
+)

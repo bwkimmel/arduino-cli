@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "board",
+    srcs = [
+        "attach.go",
+        "board.go",
+        "details.go",
+        "list.go",
+        "listall.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/cli/board",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "//cli/instance",
+        "//cli/output",
+        "//commands/board",
+        "//i18n",
+        "//rpc/commands",
+        "//table",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_fatih_color//:color",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

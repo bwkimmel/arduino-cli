@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "upload",
+    srcs = [
+        "burnbootloader.go",
+        "programmers_list.go",
+        "upload.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/commands/upload",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//arduino/sketches",
+        "//cli/feedback",
+        "//commands",
+        "//executils",
+        "//rpc/commands",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@st_bug_go_serial//:serial",
+    ],
+)

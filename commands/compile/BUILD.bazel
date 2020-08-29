@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "compile",
+    srcs = ["compile.go"],
+    importpath = "github.com/arduino/arduino-cli/commands/compile",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//arduino/sketches",
+        "//commands",
+        "//configuration",
+        "//legacy/builder",
+        "//legacy/builder/i18n",
+        "//legacy/builder/types",
+        "//rpc/commands",
+        "//telemetry",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_segmentio_stats_v4//:stats",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_viper//:viper",
+    ],
+)

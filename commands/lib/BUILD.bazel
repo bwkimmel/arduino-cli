@@ -1,0 +1,40 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "lib",
+    srcs = [
+        "download.go",
+        "install.go",
+        "list.go",
+        "resolve_deps.go",
+        "search.go",
+        "uninstall.go",
+        "upgrade.go",
+        "utils.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/commands/lib",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/libraries",
+        "//arduino/libraries/librariesindex",
+        "//arduino/libraries/librariesmanager",
+        "//commands",
+        "//rpc/commands",
+        "@com_github_imjasonmiller_godice//:godice",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)
+
+go_test(
+    name = "lib_test",
+    srcs = ["search_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":lib"],
+    deps = [
+        "//arduino/libraries/librariesmanager",
+        "//rpc/commands",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

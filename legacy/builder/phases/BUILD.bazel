@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "phases",
+    srcs = [
+        "core_builder.go",
+        "libraries_builder.go",
+        "linker.go",
+        "sizer.go",
+        "sketch_builder.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/phases",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/libraries",
+        "//legacy/builder/builder_utils",
+        "//legacy/builder/constants",
+        "//legacy/builder/types",
+        "//legacy/builder/utils",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "phases_test",
+    srcs = ["sizer_test.go"],
+    embed = [":phases"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

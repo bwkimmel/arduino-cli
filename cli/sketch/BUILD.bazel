@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "sketch",
+    srcs = [
+        "new.go",
+        "sketch.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/cli/sketch",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

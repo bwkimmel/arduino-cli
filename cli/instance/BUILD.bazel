@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "instance",
+    srcs = ["instance.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/instance",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/output",
+        "//commands",
+        "//rpc/commands",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)

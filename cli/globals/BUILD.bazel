@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "globals",
+    srcs = [
+        "args.go",
+        "globals.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/cli/globals",
+    visibility = ["//visibility:public"],
+    deps = ["//version"],
+)
+
+go_test(
+    name = "globals_test",
+    srcs = ["args_test.go"],
+    embed = [":globals"],
+    deps = [
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

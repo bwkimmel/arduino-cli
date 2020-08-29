@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "core",
+    srcs = [
+        "download.go",
+        "install.go",
+        "list.go",
+        "search.go",
+        "uninstall.go",
+        "upgrade.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/commands/core",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//commands",
+        "//rpc/commands",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "core_test",
+    srcs = ["search_test.go"],
+    embed = [":core"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "sketch",
+    srcs = ["sketch.go"],
+    importpath = "github.com/arduino/arduino-cli/arduino/sketch",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/globals",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "sketch_test",
+    srcs = ["sketch_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":sketch"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

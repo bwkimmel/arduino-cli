@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "output",
+    srcs = ["rpc_progress.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/output",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//commands",
+        "//rpc/commands",
+        "@com_github_cmaglie_pb//:pb",
+    ],
+)

@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "configuration",
+    srcs = [
+        "configuration.go",
+        "defaults.go",
+        "directories.go",
+        "term.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/configuration",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/feedback",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_win32_utils//:go-win32-utils",
+        "@com_github_mattn_go_isatty//:go-isatty",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_jwalterweatherman//:jwalterweatherman",
+        "@com_github_spf13_viper//:viper",
+    ],
+)
+
+go_test(
+    name = "configuration_test",
+    srcs = ["configuration_test.go"],
+    embed = [":configuration"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

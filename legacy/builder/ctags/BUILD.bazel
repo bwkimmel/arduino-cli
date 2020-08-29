@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "ctags",
+    srcs = [
+        "ctags_has_issues.go",
+        "ctags_parser.go",
+        "ctags_properties.go",
+        "ctags_to_prototypes.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/ctags",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//legacy/builder/types",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+    ],
+)
+
+go_test(
+    name = "ctags_test",
+    srcs = [
+        "ctags_parser_test.go",
+        "ctags_to_prototypes_test.go",
+    ],
+    embed = [":ctags"],
+    deps = [
+        "//legacy/builder/types",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//require",
+    ],
+)

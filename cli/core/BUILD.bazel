@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "core",
+    srcs = [
+        "core.go",
+        "download.go",
+        "install.go",
+        "list.go",
+        "search.go",
+        "uninstall.go",
+        "update_index.go",
+        "upgrade.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/cli/core",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "//cli/globals",
+        "//cli/instance",
+        "//cli/output",
+        "//commands",
+        "//commands/core",
+        "//configuration",
+        "//rpc/commands",
+        "//table",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

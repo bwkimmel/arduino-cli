@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "types",
+    srcs = [
+        "accessories.go",
+        "context.go",
+        "types.go",
+        "utils.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/types",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//arduino/libraries",
+        "//arduino/libraries/librariesmanager",
+        "//arduino/libraries/librariesresolver",
+        "//arduino/sketch",
+        "//legacy/builder/i18n",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+    ],
+)
+
+go_test(
+    name = "types_test",
+    srcs = ["progress_test.go"],
+    embed = [":types"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

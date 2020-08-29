@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "catalog",
+    srcs = [
+        "catalog.go",
+        "generate_catalog.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/i18n/cmd/commands/catalog",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//i18n/cmd/ast",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

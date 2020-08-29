@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "errorcodes",
+    srcs = ["errorcodes.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/errorcodes",
+    visibility = ["//visibility:public"],
+)

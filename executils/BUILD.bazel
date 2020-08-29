@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "executils",
+    srcs = [
+        "executils.go",
+        "executils_darwin.go",
+        "executils_linux.go",
+        "executils_windows.go",
+        "null.go",
+        "output.go",
+        "process.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/executils",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_pkg_errors//:errors",
+    ],
+)

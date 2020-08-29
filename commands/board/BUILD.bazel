@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "board",
+    srcs = [
+        "attach.go",
+        "details.go",
+        "list.go",
+        "listall.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/commands/board",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packagemanager",
+        "//arduino/sketches",
+        "//commands",
+        "//httpclient",
+        "//rpc/commands",
+        "@com_github_arduino_board_discovery//:board-discovery",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_segmentio_stats_v4//:stats",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)
+
+go_test(
+    name = "board_test",
+    srcs = ["list_test.go"],
+    embed = [":board"],
+    deps = [
+        "//commands",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_stretchr_testify//require",
+    ],
+)

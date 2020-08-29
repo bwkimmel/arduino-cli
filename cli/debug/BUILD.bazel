@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "debug",
+    srcs = ["debug.go"],
+    importpath = "github.com/arduino/arduino-cli/cli/debug",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "//cli/instance",
+        "//commands/debug",
+        "//rpc/commands",
+        "//rpc/debug",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

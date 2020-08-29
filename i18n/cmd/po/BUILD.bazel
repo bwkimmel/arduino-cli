@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "po",
+    srcs = [
+        "catalog.go",
+        "merge.go",
+        "parser.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/i18n/cmd/po",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "po_test",
+    srcs = [
+        "catalog_test.go",
+        "merge_test.go",
+        "parser_test.go",
+    ],
+    embed = [":po"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

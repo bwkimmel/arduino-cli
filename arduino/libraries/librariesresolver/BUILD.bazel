@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "librariesresolver",
+    srcs = ["cpp.go"],
+    importpath = "github.com/arduino/arduino-cli/arduino/libraries/librariesresolver",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/libraries",
+        "//arduino/libraries/librariesmanager",
+        "//arduino/utils",
+        "@com_github_schollz_closestmatch//:closestmatch",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)
+
+go_test(
+    name = "librariesresolver_test",
+    srcs = ["cpp_test.go"],
+    embed = [":librariesresolver"],
+    deps = [
+        "//arduino/libraries",
+        "@com_github_stretchr_testify//require",
+    ],
+)

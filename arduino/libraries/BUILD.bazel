@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "libraries",
+    srcs = [
+        "libraries.go",
+        "libraries_layout.go",
+        "libraries_location.go",
+        "librarieslist.go",
+        "lint.go",
+        "loader.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/libraries",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//rpc/commands",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)

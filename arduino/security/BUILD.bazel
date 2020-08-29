@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "security",
+    srcs = [
+        "rice-box.go",
+        "signatures.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/security",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_geertjohan_go_rice//:go.rice",
+        "@com_github_geertjohan_go_rice//embedded",
+        "@org_golang_x_crypto//openpgp",
+    ],
+)
+
+go_test(
+    name = "security_test",
+    srcs = ["signature_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":security"],
+    deps = [
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//require",
+    ],
+)

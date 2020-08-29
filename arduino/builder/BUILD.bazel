@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "builder",
+    srcs = [
+        "builder.go",
+        "sketch.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/builder",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/globals",
+        "//arduino/sketch",
+        "//cli/errorcodes",
+        "//cli/feedback",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "builder_test",
+    srcs = [
+        "builder_test.go",
+        "sketch_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    embed = [":builder"],
+    deps = [
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

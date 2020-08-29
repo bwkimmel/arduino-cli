@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "telemetry",
+    srcs = ["telemetry.go"],
+    importpath = "github.com/arduino/arduino-cli/telemetry",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//inventory",
+        "@com_github_segmentio_stats_v4//:stats",
+        "@com_github_segmentio_stats_v4//prometheus",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_viper//:viper",
+    ],
+)

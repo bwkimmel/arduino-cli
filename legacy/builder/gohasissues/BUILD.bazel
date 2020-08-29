@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "gohasissues",
+    srcs = ["go_has_issues.go"],
+    importpath = "github.com/arduino/arduino-cli/legacy/builder/gohasissues",
+    visibility = ["//visibility:public"],
+)

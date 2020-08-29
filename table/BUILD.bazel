@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "table",
+    srcs = [
+        "cell.go",
+        "table.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/table",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_fatih_color//:color"],
+)

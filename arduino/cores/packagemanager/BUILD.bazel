@@ -1,0 +1,42 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "packagemanager",
+    srcs = [
+        "download.go",
+        "identify.go",
+        "install_uninstall.go",
+        "loader.go",
+        "package_manager.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/cores/packagemanager",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/cores",
+        "//arduino/cores/packageindex",
+        "//configuration",
+        "//executils",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@st_bug_go_downloader_v2//:downloader",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)
+
+go_test(
+    name = "packagemanager_test",
+    srcs = ["package_manager_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":packagemanager"],
+    deps = [
+        "//arduino/cores",
+        "//configuration",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_arduino_go_properties_orderedmap//:go-properties-orderedmap",
+        "@com_github_spf13_viper//:viper",
+        "@com_github_stretchr_testify//require",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)

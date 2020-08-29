@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "librariesindex",
+    srcs = [
+        "index.go",
+        "json.go",
+        "reference.go",
+    ],
+    importpath = "github.com/arduino/arduino-cli/arduino/libraries/librariesindex",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//arduino/libraries",
+        "//arduino/resources",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)
+
+go_test(
+    name = "librariesindex_test",
+    srcs = ["index_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":librariesindex"],
+    deps = [
+        "//arduino/libraries",
+        "@com_github_arduino_go_paths_helper//:go-paths-helper",
+        "@com_github_stretchr_testify//require",
+        "@st_bug_go_relaxed_semver//:relaxed-semver",
+    ],
+)
