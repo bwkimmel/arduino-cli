@@ -142,6 +142,22 @@ tasks:
     cmds:
       - npx {{ .PRETTIER }} --write "**/*.{yml,yaml}"
 
+  bazel:gen:build:
+    desc: Update Bazel BUILD files
+    cmds:
+      - bazel run //:gazelle
+
+  bazel:gen:workspace:
+    desc: Update Bazel WORKSPACE file and dependencies
+    cmds:
+      - bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies
+
+  bazel:gen:
+    desc: Update Bazel WORKSPACE and BUILD files
+    cmds:
+      - task: bazel:gen:workspace
+      - task: bazel:gen:build
+
   python:check:
     desc: Linting for Python files
     cmds:
