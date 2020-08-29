@@ -1,0 +1,24 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/arduino/arduino-cli
+# gazelle:proto_strip_import_prefix /rpc
+gazelle(name = "gazelle")
+
+go_library(
+    name = "arduino-cli_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/arduino/arduino-cli",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//cli",
+        "//cli/errorcodes",
+        "//configuration",
+        "//i18n",
+    ],
+)
+
+go_binary(
+    name = "arduino-cli",
+    embed = [":arduino-cli_lib"],
+    visibility = ["//visibility:public"],
+)
